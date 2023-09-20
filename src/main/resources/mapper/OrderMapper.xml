@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhixi.mapper.OrderMapper">
+
+    <select id="findAll" resultMap="orderMapTo1">
+        SELECT
+            o.*,
+            u.*
+        FROM
+            T_ORDER o,
+            T_USER u
+        WHERE
+            o.F_USER_ID = u.ID
+    </select>
+
+    <resultMap id="orderMapTo1" type="orderDTO">
+        <!--手动指定字段与实体属性的映射关系
+            column: 数据表的字段名称
+            property：实体的属性名称
+        -->
+        <id column="ID" property="id"/>
+        <result column="F_ORDER_TIME" property="orderTime"/>
+        <result column="F_TOTAL" property="total"/>
+        <result column="F_USER_ID" property="userId"/>
+
+        <result column="ID" property="user.id"/>
+        <result column="F_NAME" property="user.name"/>
+        <result column="F_AGE" property="user.age"/>
+        <result column="F_SEX" property="user.sex"/>
+        <result column="F_ADDRESS" property="user.address"/>
+    </resultMap>
+
+    <resultMap id="orderMapTo2" type="orderDTO">
+        <!--手动指定字段与实体属性的映射关系
+            column: 数据表的字段名称
+            property：实体的属性名称
+        -->
+        <id column="ID" property="id"/>
+        <result column="F_ORDER_TIME" property="orderTime"/>
+        <result column="F_TOTAL" property="total"/>
+        <result column="F_USER_ID" property="userId"/>
+        <!--
+            property: 当前实体(order)中的属性名称(private User user)
+            javaType: 当前实体(order)中的属性的类型(User)
+        -->
+        <association property="user" javaType="user">
+            <id column="ID" property="id"/>
+            <result column="F_NAME" property="name"/>
+            <result column="F_AGE" property="age"/>
+            <result column="F_SEX" property="sex"/>
+            <result column="F_ADDRESS" property="address"/>
+        </association>
+    </resultMap>
+
+</mapper>
