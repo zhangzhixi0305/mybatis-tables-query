@@ -33,4 +33,12 @@ public interface UserService extends IService<User> {
      * @return 用户角色列表
      */
     List<UserRoleDTO> findUserRoleList();
+
+
+    /**
+     * 查询用户的所有订单，并添加查询条件
+     *
+     * @return 满足条件的用户及订单信息
+     */
+    List<UserOrderDTO> findUserOrderListByCondition();
 }

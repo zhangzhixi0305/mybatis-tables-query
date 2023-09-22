@@ -109,4 +109,31 @@
         </collection>
     </resultMap>
 
+    <select id="findUserOrderListByCondition" resultMap="findUserOrderListByConditionReaultMap">
+        SELECT
+            u.ID U_ID,
+            u.F_NAME U_NAME,
+            u.F_AGE U_AGE,
+            u.F_SEX U_SEX,
+            u.F_ADDRESS U_ADDRESS,
+            o.ID O_ID,
+            o.F_TOTAL O_TOTAL
+        FROM
+            T_USER u
+                LEFT JOIN T_ORDER o ON u.ID = o.F_USER_ID
+         ${ew.customSqlSegment}
+    </select>
+
+    <resultMap id="findUserOrderListByConditionReaultMap" type="UserOrderDTO">
+        <id property="id" column="U_ID"/>
+        <result property="name" column="U_NAME"/>
+        <result property="age" column="U_AGE"/>
+        <result property="sex" column="U_SEX"/>
+        <result property="address" column="U_ADDRESS"/>
+        <collection property="orders" ofType="order">
+            <id property="id" column="O_ID"/>
+            <result property="total" column="O_TOTAL"/>
+        </collection>
+    </resultMap>
+
 </mapper>

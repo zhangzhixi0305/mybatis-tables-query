@@ -65,4 +65,15 @@ public class UserController {
     public List<UserRoleDTO> findUserRoleList(){
         return userService.findUserRoleList();
     }
+
+    /**
+     * 自定义SQL，多表，使用MP的自定义SQL实现
+     * @return 一个用户拥有多个订单信息，添加查询条件进行筛选指定订单信息
+     */
+    @GetMapping("/findUserOrderListByCondition")
+    public ResponseEntity<List<UserOrderDTO>> findUserOrderListByCondition(){
+        List<UserOrderDTO> userOrderListByCondition = userService.findUserOrderListByCondition();
+        return ResponseEntity.ok(userOrderListByCondition);
+    }
+
 }

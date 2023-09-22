@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhixi.mapper.OrderMapper">
+    <update id="updateOrderTotalPrice">
+        update T_ORDER
+        set F_TOTAL = F_TOTAL - #{amount}
+            ${ew.customSqlSegment}
+    </update>
 
     <select id="findAll" resultMap="orderMapTo1">
         SELECT

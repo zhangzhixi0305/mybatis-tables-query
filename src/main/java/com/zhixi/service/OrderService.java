@@ -1,8 +1,10 @@
 package com.zhixi.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhixi.pojo.Order;
 import com.zhixi.pojo.dto.OrderDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +20,13 @@ public interface OrderService extends IService<Order> {
      * @return 订单列表
      */
     List<OrderDTO> findAll();
+
+
+    /**
+     * 更新订单总价
+     *
+     * @param modifyTheAmount 修改的金额
+     * @param ids         订单id列表
+     */
+    int updateOrderTotalPrice(Double modifyTheAmount, List<Long> ids);
 }

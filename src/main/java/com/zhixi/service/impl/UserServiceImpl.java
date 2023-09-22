@@ -1,5 +1,8 @@
 package com.zhixi.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhixi.mapper.UserMapper;
 import com.zhixi.pojo.User;
@@ -36,6 +39,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public List<UserRoleDTO> findUserRoleList() {
         return userMapper.findUserRoleList();
+    }
+
+    @Override
+    public List<UserOrderDTO> findUserOrderListByCondition() {
+        // 拼接查询条件
+        QueryWrapper<UserOrderDTO> userOrderQueryWrapper = new QueryWrapper<>(UserOrderDTO.class)
+                .ge("o.F_TOTAL", 1500)
+                .eq("u.F_NAME", "张三");
+        return userMapper.findUserOrderListByCondition(userOrderQueryWrapper);
     }
 }
 

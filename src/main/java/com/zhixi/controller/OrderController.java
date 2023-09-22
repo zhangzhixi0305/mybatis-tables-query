@@ -38,4 +38,32 @@ public class OrderController {
         List<OrderDTO> orderDTOList = orderService.findAll();
         return ResponseEntity.ok(orderDTOList);
     }
+
+
+    /**
+     * 扣除订单金额，使用MP的自定义SQL实现
+     * @param modifyTheAmount 要进行扣除的金额
+     * @param ids 订单id集合
+     * @return 是否更新成功
+     */
+    @PostMapping("/updateOrderTotalPrice")
+    public ResponseEntity<String> updateOrderTotalPrice(@RequestParam String modifyTheAmount, @RequestParam List<Long> ids) {
+        orderService.updateOrderTotalPrice(Double.valueOf(modifyTheAmount), ids);
+        return ResponseEntity.ok("更新成功");
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
